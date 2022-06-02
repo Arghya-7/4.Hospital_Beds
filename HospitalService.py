@@ -1,5 +1,11 @@
 #USE THIS --> pip install mysql-connector-python
 import sys
+import subprocess
+
+try:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pip install mysql-connector-python'])
+except Exception:
+    pass
 import mysql.connector
 # attributs of hospital=(reg_no(primary key,hosp_name,password,loc,pincode,mobile,bed_no )
 """
@@ -26,8 +32,8 @@ mycursor=mydb.cursor()
 # print(a)
 class Devloper:
     def defineDatabase(self):
-        sql="DROP TABLE hospital;"
-        mycursor.execute(sql)
+        # sql="DROP TABLE hospital;"
+        # mycursor.execute(sql)
         sql="CREATE TABLE hospital(reg_no VARCHAR(20) PRIMARY KEY,hosp_name VARCHAR(20) NOT NULL,password VARCHAR(20),loc VARCHAR(20) NOT NULL,pincode VARCHAR(20) NOT NULL,moblile VARCHAR(20),bed_no VARCHAR(20));"
         mycursor.execute(sql)
         mydb.commit()
@@ -95,7 +101,7 @@ class Hospital:
             mobile = input("Enter 10 digit mobile number of your hospital::")
             while True:
                 if len(mobile) != 10:
-                    print("Re-Enter Mobile number")
+                    mobile=input("Re-enter mobile number:")
                 else:
                     break
             sql="INSERT INTO hospital(reg_no,hosp_name,password,loc,pincode,moblile,bed_no) VALUES(%s,%s,%s,%s,%s,%s,%s);"
@@ -111,7 +117,7 @@ class Hospital:
         if fp[0][0]==password:
             no_of_bed=input("Enter number of bed:")
             sql="UPDATE hospital SET bed_no='"+no_of_bed+"' WHERE reg_no='"+reg_no+"' ;"
-            print(sql)
+            # print(sql)
             mycursor.execute(sql)
             mydb.commit()
     def control(self):
