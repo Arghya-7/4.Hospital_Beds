@@ -1,11 +1,5 @@
 #USE THIS --> pip install mysql-connector-python
 import sys
-import subprocess
-
-try:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'pip install mysql-connector-python'])
-except Exception:
-    pass
 import mysql.connector
 # attributs of hospital=(reg_no(primary key,hosp_name,password,loc,pincode,mobile,bed_no )
 """
@@ -32,8 +26,8 @@ mycursor=mydb.cursor()
 # print(a)
 class Devloper:
     def defineDatabase(self):
-        # sql="DROP TABLE hospital;"
-        # mycursor.execute(sql)
+        sql="DROP TABLE IF EXISTS hospital;"
+        mycursor.execute(sql)
         sql="CREATE TABLE hospital(reg_no VARCHAR(20) PRIMARY KEY,hosp_name VARCHAR(20) NOT NULL,password VARCHAR(20),loc VARCHAR(20) NOT NULL,pincode VARCHAR(20) NOT NULL,moblile VARCHAR(20),bed_no VARCHAR(20));"
         mycursor.execute(sql)
         mydb.commit()
